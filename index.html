@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mall Sampah - Ubah Sampahmu Menjadi Rupiah</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#2E8B57", secondary: "#8FBC8F" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+          font-family: 'Poppins', sans-serif;
+      }
+      .count-up {
+          transition: all 0.5s ease-in-out;
+      }
+      .nav-link {
+          position: relative;
+      }
+      .nav-link::after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: -4px;
+          left: 0;
+          background-color: #2E8B57;
+          transition: width 0.3s;
+      }
+      .nav-link:hover::after {
+          width: 100%;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+      .custom-checkbox {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+      }
+      .custom-checkbox input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+      }
+      .checkmark {
+          height: 20px;
+          width: 20px;
+          background-color: #fff;
+          border: 2px solid #2E8B57;
+          border-radius: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+      .custom-checkbox input:checked ~ .checkmark:after {
+          content: "";
+          display: block;
+          width: 10px;
+          height: 10px;
+          background-color: #2E8B57;
+          border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-sm fixed w-full top-0 z-50">
+      <div
+        class="container mx-auto px-4 py-3 flex justify-between items-center"
+      >
+        <a href="#" class="flex items-center">
+          <span class="text-primary text-2xl font-['Pacifico']"
+            >H!jauin</span
+          >
+        </a>
+
+        <div class="hidden md:flex items-center space-x-8">
+          <nav class="flex items-center space-x-6">
+            <a
+              href="#"
+              class="nav-link text-gray-800 font-medium hover:text-primary transition-colors"
+              >Beranda</a
+            >
+            <a
+              href="#"
+              class="nav-link text-gray-800 font-medium hover:text-primary transition-colors"
+              >Tentang Kami</a
+            >
+            <a
+              href="#"
+              class="nav-link text-gray-800 font-medium hover:text-primary transition-colors"
+              >Layanan</a
+            >
+            <a
+              href="#"
+              class="nav-link text-gray-800 font-medium hover:text-primary transition-colors"
+              >Kontak</a
+            >
+          </nav>
+          <button
+            class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+          >
+            Masuk / Daftar
+          </button>
+        </div>
+
+        <button class="md:hidden flex items-center justify-center w-10 h-10">
+          <i class="ri-menu-line text-gray-800 text-2xl"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div
+      class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"
+      id="mobile-menu-overlay"
+    >
+      <div
+        class="bg-white h-full w-64 p-5 transform transition-transform -translate-x-full"
+        id="mobile-menu"
+      >
+        <div class="flex justify-between items-center mb-6">
+          <span class="text-primary text-xl font-['Pacifico']"
+            >H!jauin</span
+          >
+          <button
+            id="close-menu"
+            class="flex items-center justify-center w-8 h-8"
+          >
+            <i class="ri-close-line text-gray-800 text-xl"></i>
+          </button>
+        </div>
+        <nav class="flex flex-col space-y-4">
+          <a
+            href="#"
+            class="text-gray-800 font-medium hover:text-primary transition-colors"
+            >Beranda</a
+          >
+          <a
+            href="#"
+            class="text-gray-800 font-medium hover:text-primary transition-colors"
+            >Tentang Kami</a
+          >
+          <a
+            href="#"
+            class="text-gray-800 font-medium hover:text-primary transition-colors"
+            >Layanan</a
+          >
+          <a
+            href="#"
+            class="text-gray-800 font-medium hover:text-primary transition-colors"
+            >Kontak</a
+          >
+        </nav>
+        <div class="mt-6">
+          <button
+            class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-opacity-90 transition-colors w-full whitespace-nowrap"
+          >
+            Login / Register
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section
+      class="pt-20 relative overflow-hidden"
+      style="background-image: url('https://readdy.ai/api/search-image?query=A%20professional%20photograph%20showing%20recycling%20activities%2C%20with%20people%20sorting%20recyclable%20materials%20like%20plastic%20bottles%2C%20paper%2C%20and%20metal%20cans.%20The%20image%20has%20a%20green-themed%20gradient%20on%20the%20left%20side%20that%20smoothly%20transitions%20to%20a%20clearer%20view%20of%20recycling%20activities%20on%20the%20right.%20The%20left%20side%20has%20ample%20space%20for%20text%20overlay%2C%20with%20a%20clean%2C%20minimalist%20aesthetic.%20The%20overall%20mood%20is%20positive%20and%20environmentally%20conscious.&width=1920&height=800&seq=hero123&orientation=landscape'); background-size: cover; background-position: center;"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-primary/90 to-transparent"
+      ></div>
+      <div class="container mx-auto px-4 py-20 md:py-32 relative z-10 w-full">
+        <div class="max-w-xl text-white">
+          <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+            Ubah Sampahmu Menjadi Rupiah
+          </h1>
+          <p class="text-lg md:text-xl mb-8">
+            Platform jual beli sampah terpercaya yang membantu Anda mengubah
+            sampah menjadi nilai ekonomi sambil menjaga lingkungan.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button
+              class="bg-white text-primary px-6 py-3 !rounded-button font-medium hover:bg-gray-100 transition-colors whitespace-nowrap"
+            >
+              Mulai Sekarang
+            </button>
+            <button
+              class="bg-transparent border-2 border-white text-white px-6 py-3 !rounded-button font-medium hover:bg-white/10 transition-colors whitespace-nowrap"
+            >
+              Pelajari Lebih Lanjut
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fitur Utama -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-800 mb-3">
+            Fitur Utama Kami
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Solusi lengkap untuk pengelolaan sampah yang berkelanjutan dan
+            menguntungkan bagi semua pihak.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Jual Sampah -->
+          <div
+            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow transform hover:-translate-y-1 duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto"
+            >
+              <i class="ri-recycle-line text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-800 text-center mb-3">
+              Jual Sampah
+            </h3>
+            <p class="text-gray-600 text-center">
+              Jual sampah daur ulang Anda dengan harga terbaik. Kami menerima
+              berbagai jenis sampah seperti kertas, plastik, logam, dan
+              elektronik.
+            </p>
+            <div class="mt-4 text-center">
+              <a
+                href="#"
+                class="text-primary font-medium inline-flex items-center"
+              >
+                Jual Sekarang
+                <i class="ri-arrow-right-line ml-1"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Beli Sampah -->
+          <div
+            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow transform hover:-translate-y-1 duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto"
+            >
+              <i class="ri-shopping-cart-line text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-800 text-center mb-3">
+              Beli Sampah
+            </h3>
+            <p class="text-gray-600 text-center">
+              Temukan bahan daur ulang berkualitas untuk kebutuhan bisnis atau
+              industri Anda dengan harga kompetitif dari jaringan pemasok kami.
+            </p>
+            <div class="mt-4 text-center">
+              <a
+                href="#"
+                class="text-primary font-medium inline-flex items-center"
+              >
+                Belanja Sekarang
+                <i class="ri-arrow-right-line ml-1"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Edukasi Sampah -->
+          <div
+            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow transform hover:-translate-y-1 duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto"
+            >
+              <i class="ri-book-open-line text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-800 text-center mb-3">
+              Edukasi Sampah
+            </h3>
+            <p class="text-gray-600 text-center">
+              Akses konten edukasi tentang pengelolaan sampah, daur ulang, dan
+              gaya hidup berkelanjutan untuk membantu Anda berkontribusi pada
+              lingkungan.
+            </p>
+            <div class="mt-4 text-center">
+              <a
+                href="#"
+                class="text-primary font-medium inline-flex items-center"
+              >
+                Pelajari Lebih Lanjut
+                <i class="ri-arrow-right-line ml-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cara Kerja -->
+    <section class="py-16 bg-green-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-800 mb-3">Cara Kerja</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Proses sederhana untuk memulai perjalanan daur ulang Anda bersama
+            Mall Sampah.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Langkah 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <div
+              class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mb-4 mx-auto"
+            >
+              1
+            </div>
+            <div
+              class="h-40 mb-4 overflow-hidden rounded-lg"
+              style="background-image: url('https://readdy.ai/api/search-image?query=A%20simple%20illustration%20showing%20a%20person%20registering%20or%20logging%20into%20a%20website%20on%20a%20computer%20or%20smartphone%2C%20with%20a%20clean%20white%20background.%20The%20illustration%20style%20is%20minimalist%20and%20modern%2C%20focusing%20on%20the%20registration%20process%20with%20form%20fields%20visible%20on%20the%20screen.&width=400&height=300&seq=step1&orientation=landscape'); background-size: cover; background-position: center;"
+            ></div>
+            <h3 class="text-xl font-semibold text-gray-800 text-center mb-2">
+              Daftar/Login
+            </h3>
+            <p class="text-gray-600 text-center">
+              Buat akun atau login ke platform Mall Sampah untuk mengakses semua
+              layanan kami.
+            </p>
+          </div>
+
+          <!-- Langkah 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <div
+              class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mb-4 mx-auto"
+            >
+              2
+            </div>
+            <div
+              class="h-40 mb-4 overflow-hidden rounded-lg"
+              style="background-image: url('https://readdy.ai/api/search-image?query=A%20simple%20illustration%20showing%20a%20person%20selecting%20from%20different%20service%20options%20on%20a%20website%20or%20app%20interface.%20The%20illustration%20shows%20various%20service%20categories%20like%20recycling%2C%20buying%2C%20and%20education%20with%20clear%20icons.%20The%20style%20is%20minimalist%20and%20modern%20with%20a%20clean%20white%20background.&width=400&height=300&seq=step2&orientation=landscape'); background-size: cover; background-position: center;"
+            ></div>
+            <h3 class="text-xl font-semibold text-gray-800 text-center mb-2">
+              Pilih Layanan
+            </h3>
+            <p class="text-gray-600 text-center">
+              Pilih layanan yang Anda butuhkan: jual sampah, beli sampah, atau
+              akses konten edukasi.
+            </p>
+          </div>
+
+          <!-- Langkah 3 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <div
+              class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mb-4 mx-auto"
+            >
+              3
+            </div>
+            <div
+              class="h-40 mb-4 overflow-hidden rounded-lg"
+              style="background-image: url('https://readdy.ai/api/search-image?query=A%20simple%20illustration%20showing%20a%20person%20inputting%20waste%20data%20into%20a%20form%20on%20a%20computer%20or%20smartphone.%20The%20illustration%20shows%20someone%20categorizing%20different%20types%20of%20waste%20materials%20with%20weight%20or%20quantity%20information.%20The%20style%20is%20minimalist%20and%20modern%20with%20a%20clean%20white%20background.&width=400&height=300&seq=step3&orientation=landscape'); background-size: cover; background-position: center;"
+            ></div>
+            <h3 class="text-xl font-semibold text-gray-800 text-center mb-2">
+              Input Data Sampah
+            </h3>
+            <p class="text-gray-600 text-center">
+              Masukkan informasi tentang sampah yang ingin Anda jual atau beli,
+              termasuk jenis, berat, dan lokasi.
+            </p>
+          </div>
+
+          <!-- Langkah 4 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <div
+              class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mb-4 mx-auto"
+            >
+              4
+            </div>
+            <div
+              class="h-40 mb-4 overflow-hidden rounded-lg"
+              style="background-image: url('https://readdy.ai/api/search-image?query=A%20simple%20illustration%20showing%20a%20transaction%20being%20completed%20between%20two%20people%2C%20with%20one%20person%20handing%20over%20recyclable%20materials%20and%20the%20other%20person%20making%20a%20payment.%20The%20illustration%20shows%20money%20or%20digital%20payment%20being%20exchanged%20for%20waste%20materials.%20The%20style%20is%20minimalist%20and%20modern%20with%20a%20clean%20white%20background.&width=400&height=300&seq=step4&orientation=landscape'); background-size: cover; background-position: center;"
+            ></div>
+            <h3 class="text-xl font-semibold text-gray-800 text-center mb-2">
+              Transaksi
+            </h3>
+            <p class="text-gray-600 text-center">
+              Selesaikan transaksi dengan aman melalui platform kami dan
+              dapatkan pembayaran langsung ke rekening Anda.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistik & Pencapaian -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-800 mb-3">Dampak Kami</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Bersama-sama, kita telah mencapai kemajuan signifikan dalam
+            pengelolaan sampah dan pelestarian lingkungan.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Pengguna -->
+          <div class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
+            <div
+              class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto"
+            >
+              <i class="ri-user-line text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-4xl font-bold text-gray-800 text-center mb-2">
+              <span class="count-up" data-target="15000">0</span>+
+            </h3>
+            <p class="text-gray-600 text-center">Pengguna Aktif</p>
+          </div>
+
+          <!-- Transaksi -->
+          <div class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
+            <div
+              class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto"
+            >
+              <i class="ri-exchange-dollar-line text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-4xl font-bold text-gray-800 text-center mb-2">
+              <span class="count-up" data-target="27500">0</span>+
+            </h3>
+            <p class="text-gray-600 text-center">Total Transaksi</p>
+          </div>
+
+          <!-- Sampah Terkelola -->
+          <div class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
+            <div
+              class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto"
+            >
+              <i class="ri-recycle-line text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-4xl font-bold text-gray-800 text-center mb-2">
+              <span class="count-up" data-target="850">0</span> ton
+            </h3>
+            <p class="text-gray-600 text-center">Sampah Terkelola</p>
+          </div>
+
+          <!-- Impact Lingkungan -->
+          <div class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
+            <div
+              class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto"
+            >
+              <i class="ri-plant-line text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-4xl font-bold text-gray-800 text-center mb-2">
+              <span class="count-up" data-target="1250">0</span> ton
+            </h3>
+            <p class="text-gray-600 text-center">CO₂ Terhindarkan</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="py-16 bg-green-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-800 mb-3">Apa Kata Mereka</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Dengarkan pengalaman dari pengguna Mall Sampah yang telah merasakan
+            manfaatnya.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-4"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=Professional%20headshot%20portrait%20of%20an%20Indonesian%20woman%20in%20her%2030s%20with%20a%20friendly%20smile%2C%20looking%20directly%20at%20camera%2C%20with%20a%20simple%20neutral%20background.%20The%20image%20should%20be%20cropped%20to%20show%20just%20the%20face%20and%20shoulders%2C%20with%20professional%20lighting.&width=100&height=100&seq=testi1&orientation=squarish"
+                  alt="Foto Profil"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-gray-800">
+                  Dewi Sulistiani
+                </h4>
+                <p class="text-gray-600 text-sm">Ibu Rumah Tangga, Jakarta</p>
+              </div>
+            </div>
+            <p class="text-gray-700 italic">
+              "Mall Sampah membantu saya mendapatkan penghasilan tambahan dari
+              sampah rumah tangga yang biasanya hanya dibuang. Prosesnya sangat
+              mudah dan pembayarannya cepat!"
+            </p>
+            <div class="mt-4 flex">
+              <i class="ri-star-fill text-yellow-400"></i>
+              <i class="ri-star-fill text-yellow-400"></i>
+              <i class="ri-star-fill text-yellow-400"></i>
+              <i class="ri-star-fill text-yellow-400"></i>
+              <i class="ri-star-fill text-yellow-400"></i>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-4"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=Professional%20headshot%20portrait%20of%20an%20Indonesian%20man%20in%20his%2040s%20with%20a%20confident%20expression%2C%20looking%20directly%20at%20camera%2C%20with%20a%20simple%20neutral%20background.%20The%20image%20should%20be%20cropped%20to%20show%20just%20the%20face%20and%20shoulders%2C%20with%20professional%20lighting.&width=100&height=100&seq=testi2&orientation=squarish"
+                  alt="Foto Profil"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-gray-800">
+                  Budi Santoso
+                </h4>
+                <p class="text-gray-600 text-sm">
+                  Pengusaha Daur Ulang, Bandung
+                </p>
+              </div>
+            </div>
+            <p class="text-gray-700 italic">
+              "Sebagai pengusaha daur ulang, Mall Sampah membantu saya menemukan
+              pemasok bahan baku berkualitas dengan harga yang kompetitif.
+              Platform ini sangat memudahkan bisnis saya."
+            </p>
+            <div class="mt-4 flex">
+              <i class="ri-star-fill text-yellow-400"></i>
+              <i class="ri-star-fill text-yellow-400"></i>
+              <i class="ri-star-fill text-yellow-400"></i>
+              <i class="ri-star-fill text-yellow-400"></i>
+              <i class="ri-star-half-fill text-yellow-400"></i>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-4"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=Professional%20headshot%20portrait%20of%20a%20young%20Indonesian%20woman%20in%20her%2020s%20with%20a%20bright%20smile%2C%20looking%20directly%20at%20camera%2C%20with%20a%20simple%20neutral%20background.%20The%20image%20should%20be%20cropped%20to%20show%20just%20the%20face%20and%20shoulders%2C%20with%20professional%20lighting.&width=100&height=100&seq=testi3&orientation=squarish"
+                  alt="Foto Profil"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-gray-800">Rina Wijaya</h4>
+                <p class="text-gray-600 text-sm">
+                  Aktivis Lingkungan, Surabaya
+                </p>
+              </div>
+            </div>
+            <p class="text-gray-700 italic">
+              "Mall Sampah bukan hanya platform jual beli, tapi juga sumber
+              edukasi yang luar biasa tentang pengelolaan sampah. Saya
+              merekomendasikan platform ini untuk semua yang peduli lingkungan."
+            </p>
+            <div class="mt-4 flex">
+              <i class="ri-star-fill text-yellow-400"></i>
+              <i class="ri-star-fill text-yellow-400"></i>
+              <i class="ri-star-fill text-yellow-400"></i>
+              <i class="ri-star-fill text-yellow-400"></i>
+              <i class="ri-star-fill text-yellow-400"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-primary">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center text-white">
+          <h2 class="text-3xl font-bold mb-4">
+            Siap Mengubah Sampah Menjadi Rupiah?
+          </h2>
+          <p class="text-lg mb-8">
+            Bergabunglah dengan ribuan pengguna Mall Sampah dan mulai
+            berkontribusi untuk lingkungan yang lebih baik sambil mendapatkan
+            keuntungan ekonomi.
+          </p>
+          <button
+            class="bg-white text-primary px-8 py-3 !rounded-button font-medium hover:bg-gray-100 transition-colors whitespace-nowrap"
+          >
+            Daftar Sekarang
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <!-- About -->
+          <div>
+            <h3 class="text-xl font-['Pacifico'] mb-4">Mall Sampah</h3>
+            <p class="text-gray-300 mb-4">
+              Platform jual beli sampah terpercaya yang menghubungkan penjual
+              dan pembeli sampah daur ulang untuk menciptakan ekonomi sirkular
+              yang berkelanjutan.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
+              >
+                <i class="ri-facebook-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
+              >
+                <i class="ri-instagram-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
+              >
+                <i class="ri-twitter-x-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
+              >
+                <i class="ri-youtube-line"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Tautan Cepat</h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Beranda</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Tentang Kami</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Layanan</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Blog</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >FAQ</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Kontak</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Kontak</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <span class="text-gray-300"
+                  >Jl. Eco Waste No. 123, Jakarta Selatan, Indonesia 12345</span
+                >
+              </li>
+              <li class="flex items-center">
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-phone-line"></i>
+                </div>
+                <span class="text-gray-300">+62 21 1234 5678</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-mail-line"></i>
+                </div>
+                <span class="text-gray-300">info@mallsampah.com</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Newsletter -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Berlangganan</h3>
+            <p class="text-gray-300 mb-4">
+              Dapatkan informasi terbaru tentang layanan dan tips pengelolaan
+              sampah.
+            </p>
+            <form class="flex flex-col space-y-3">
+              <input
+                type="email"
+                placeholder="Email Anda"
+                class="px-4 py-2 rounded-button bg-gray-700 border-none text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+              <button
+                type="submit"
+                class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+              >
+                Berlangganan
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t border-gray-700 text-center text-gray-400">
+          <div class="flex justify-center space-x-6 mb-4">
+            <i class="ri-visa-line text-2xl"></i>
+            <i class="ri-mastercard-line text-2xl"></i>
+            <i class="ri-paypal-line text-2xl"></i>
+            <i class="ri-bank-card-line text-2xl"></i>
+          </div>
+          <p>&copy; 2025 Mall Sampah. Hak Cipta Dilindungi.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script id="mobileMenuScript">
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileMenuButton = document.querySelector(".md\\:hidden");
+        const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const closeMenuButton = document.getElementById("close-menu");
+
+        mobileMenuButton.addEventListener("click", function () {
+          mobileMenuOverlay.classList.remove("hidden");
+          setTimeout(() => {
+            mobileMenu.classList.remove("-translate-x-full");
+          }, 10);
+        });
+
+        closeMenuButton.addEventListener("click", function () {
+          mobileMenu.classList.add("-translate-x-full");
+          setTimeout(() => {
+            mobileMenuOverlay.classList.add("hidden");
+          }, 300);
+        });
+
+        mobileMenuOverlay.addEventListener("click", function (e) {
+          if (e.target === mobileMenuOverlay) {
+            mobileMenu.classList.add("-translate-x-full");
+            setTimeout(() => {
+              mobileMenuOverlay.classList.add("hidden");
+            }, 300);
+          }
+        });
+      });
+    </script>
+
+    <script id="countUpScript">
+      document.addEventListener("DOMContentLoaded", function () {
+        const countUpElements = document.querySelectorAll(".count-up");
+
+        const isElementInViewport = (el) => {
+          const rect = el.getBoundingClientRect();
+          return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <=
+              (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+          );
+        };
+
+        const countUp = (el) => {
+          const target = parseInt(el.getAttribute("data-target"));
+          const duration = 2000; // 2 seconds
+          const increment = target / (duration / 16); // 60fps
+
+          let current = 0;
+          const timer = setInterval(() => {
+            current += increment;
+            el.textContent = Math.floor(current);
+
+            if (current >= target) {
+              el.textContent = target;
+              clearInterval(timer);
+            }
+          }, 16);
+        };
+
+        const handleScroll = () => {
+          countUpElements.forEach((el) => {
+            if (isElementInViewport(el) && !el.classList.contains("counted")) {
+              countUp(el);
+              el.classList.add("counted");
+            }
+          });
+        };
+
+        // Initial check
+        handleScroll();
+
+        // Add scroll event
+        window.addEventListener("scroll", handleScroll);
+      });
+    </script>
+  </body>
+</html>

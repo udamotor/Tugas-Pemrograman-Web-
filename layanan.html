@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Layanan - Mall Sampah</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#2ECC71", secondary: "#27AE60" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+          font-family: 'Poppins', sans-serif;
+      }
+      .hero-section {
+          background-image: linear-gradient(rgba(46, 204, 113, 0.7), rgba(39, 174, 96, 0.7)), url('https://readdy.ai/api/search-image?query=waste%20management%20facility%20with%20workers%20sorting%20recyclable%20materials%2C%20clean%20environment%2C%20modern%20recycling%20center%2C%20natural%20lighting%2C%20professional%20waste%20management%2C%20high%20quality%20photography&width=1920&height=800&seq=1&orientation=landscape');
+          background-size: cover;
+          background-position: center;
+      }
+      .testimonial-card {
+          transition: transform 0.3s ease;
+      }
+      .testimonial-card:hover {
+          transform: translateY(-5px);
+      }
+      .service-card {
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .service-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+      .cta-section {
+          background-image: linear-gradient(rgba(46, 204, 113, 0.9), rgba(39, 174, 96, 0.9)), url('https://readdy.ai/api/search-image?query=abstract%20pattern%20with%20leaves%20and%20recycling%20symbols%2C%20subtle%20environmental%20theme%2C%20light%20and%20airy%2C%20professional%20background%20for%20environmental%20services&width=1920&height=500&seq=2&orientation=landscape');
+          background-size: cover;
+          background-position: center;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+      .custom-checkbox {
+          position: relative;
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          margin-right: 10px;
+      }
+      .custom-checkbox input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+      }
+      .checkmark {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 20px;
+          width: 20px;
+          background-color: #fff;
+          border: 2px solid #ddd;
+          border-radius: 4px;
+      }
+      .custom-checkbox input:checked ~ .checkmark {
+          background-color: #2ECC71;
+          border-color: #2ECC71;
+      }
+      .checkmark:after {
+          content: "";
+          position: absolute;
+          display: none;
+      }
+      .custom-checkbox input:checked ~ .checkmark:after {
+          display: block;
+      }
+      .custom-checkbox .checkmark:after {
+          left: 6px;
+          top: 2px;
+          width: 5px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+      }
+      .custom-switch {
+          position: relative;
+          display: inline-block;
+          width: 50px;
+          height: 24px;
+      }
+      .custom-switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+      }
+      .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          transition: .4s;
+          border-radius: 34px;
+      }
+      .slider:before {
+          position: absolute;
+          content: "";
+          height: 16px;
+          width: 16px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          transition: .4s;
+          border-radius: 50%;
+      }
+      input:checked + .slider {
+          background-color: #2ECC71;
+      }
+      input:checked + .slider:before {
+          transform: translateX(26px);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+      <div
+        class="container mx-auto px-4 py-3 flex items-center justify-between"
+      >
+        <a href="#" class="text-2xl font-['Pacifico'] text-primary">H!jauin</a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="#" class="text-gray-600 hover:text-primary transition-colors"
+            >Beranda</a
+          >
+          <a href="#" class="text-gray-600 hover:text-primary transition-colors"
+            >Tentang Kami</a
+          >
+          <a
+            href="#"
+            class="text-primary font-medium border-b-2 border-primary pb-1"
+            >Layanan</a
+          >
+          <a href="#" class="text-gray-600 hover:text-primary transition-colors"
+            >Kontak</a
+          >
+        </nav>
+
+        <!-- Login/Register Button -->
+        <div class="hidden md:flex items-center">
+          <button
+            class="bg-primary text-white px-5 py-2 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+          >
+            Masuk / Daftar
+          </button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          class="md:hidden w-10 h-10 flex items-center justify-center text-gray-700"
+        >
+          <i class="ri-menu-line ri-lg"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Navigation Menu (Hidden by default) -->
+    <div class="hidden fixed inset-0 bg-white z-40 pt-20 px-4">
+      <nav class="flex flex-col space-y-4">
+        <a href="#" class="text-gray-600 py-2 border-b border-gray-100"
+          >Beranda</a
+        >
+        <a href="#" class="text-gray-600 py-2 border-b border-gray-100"
+          >Tentang Kami</a
+        >
+        <a
+          href="#"
+          class="text-primary font-medium py-2 border-b border-gray-100"
+          >Layanan</a
+        >
+        <a href="#" class="text-gray-600 py-2 border-b border-gray-100"
+          >Kontak</a
+        >
+        <button class="bg-primary text-white py-3 mt-4 !rounded-button">
+          Login / Register
+        </button>
+      </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section pt-28 pb-20 text-white">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Layanan Mall Sampah</h1>
+        <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8">
+          Solusi pengelolaan sampah terpadu untuk lingkungan yang lebih bersih
+          dan berkelanjutan. Kami menawarkan berbagai layanan untuk membantu
+          Anda mengelola sampah dengan cara yang efisien dan ramah lingkungan.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <button
+            class="bg-white text-primary px-6 py-3 font-medium !rounded-button hover:bg-gray-100 transition-colors whitespace-nowrap"
+          >
+            Mulai Sekarang
+          </button>
+          <button
+            class="border-2 border-white text-white px-6 py-3 font-medium !rounded-button hover:bg-white hover:bg-opacity-10 transition-colors whitespace-nowrap"
+          >
+            Pelajari Lebih Lanjut
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kategori Layanan -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-4">Kategori Layanan Kami</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Mall Sampah menyediakan berbagai layanan pengelolaan sampah yang
+            komprehensif untuk memenuhi kebutuhan individu, bisnis, dan
+            komunitas.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Pengumpulan Sampah -->
+          <div
+            class="service-card bg-white p-6 rounded-lg shadow-md border border-gray-100"
+          >
+            <div
+              class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto"
+            >
+              <i class="ri-recycle-line ri-xl text-primary"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-center mb-3">
+              Pengumpulan Sampah
+            </h3>
+            <p class="text-gray-600 text-center mb-5">
+              Layanan pengambilan sampah terjadwal dari rumah, kantor, atau
+              bisnis Anda dengan sistem pemilahan yang efisien.
+            </p>
+            <div class="text-center">
+              <button
+                class="text-primary font-medium hover:underline flex items-center justify-center mx-auto whitespace-nowrap"
+              >
+                Selengkapnya <i class="ri-arrow-right-line ml-1"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Daur Ulang -->
+          <div
+            class="service-card bg-white p-6 rounded-lg shadow-md border border-gray-100"
+          >
+            <div
+              class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto"
+            >
+              <i class="ri-leaf-line ri-xl text-primary"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-center mb-3">Daur Ulang</h3>
+            <p class="text-gray-600 text-center mb-5">
+              Proses daur ulang modern untuk mengubah sampah menjadi produk
+              bernilai dengan teknologi ramah lingkungan.
+            </p>
+            <div class="text-center">
+              <button
+                class="text-primary font-medium hover:underline flex items-center justify-center mx-auto whitespace-nowrap"
+              >
+                Selengkapnya <i class="ri-arrow-right-line ml-1"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Edukasi Lingkungan -->
+          <div
+            class="service-card bg-white p-6 rounded-lg shadow-md border border-gray-100"
+          >
+            <div
+              class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto"
+            >
+              <i class="ri-book-open-line ri-xl text-primary"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-center mb-3">
+              Edukasi Lingkungan
+            </h3>
+            <p class="text-gray-600 text-center mb-5">
+              Program edukasi dan pelatihan tentang pengelolaan sampah dan
+              praktik berkelanjutan untuk semua usia.
+            </p>
+            <div class="text-center">
+              <button
+                class="text-primary font-medium hover:underline flex items-center justify-center mx-auto whitespace-nowrap"
+              >
+                Selengkapnya <i class="ri-arrow-right-line ml-1"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Program Kemitraan -->
+          <div
+            class="service-card bg-white p-6 rounded-lg shadow-md border border-gray-100"
+          >
+            <div
+              class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto"
+            >
+              <i class="ri-team-line ri-xl text-primary"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-center mb-3">
+              Program Kemitraan
+            </h3>
+            <p class="text-gray-600 text-center mb-5">
+              Kolaborasi dengan bisnis dan komunitas untuk menciptakan solusi
+              pengelolaan sampah yang berkelanjutan.
+            </p>
+            <div class="text-center">
+              <button
+                class="text-primary font-medium hover:underline flex items-center justify-center mx-auto whitespace-nowrap"
+              >
+                Selengkapnya <i class="ri-arrow-right-line ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detail Layanan: Pengumpulan Sampah -->
+    <section class="py-16 bg-gray-50" id="pengumpulan">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <div class="w-full lg:w-1/2">
+            <img
+              src="https://readdy.ai/api/search-image?query=modern%20waste%20collection%20service%20with%20uniformed%20staff%20collecting%20sorted%20waste%20from%20residential%20area%2C%20clean%20environment%2C%20professional%20waste%20management%20vehicle%2C%20high%20quality%20photography&width=600&height=400&seq=3&orientation=landscape"
+              alt="Pengumpulan Sampah"
+              class="rounded-lg shadow-lg object-cover w-full h-full object-top"
+            />
+          </div>
+          <div class="w-full lg:w-1/2">
+            <h2 class="text-3xl font-bold mb-4">Pengumpulan Sampah</h2>
+            <p class="text-gray-600 mb-6">
+              Layanan pengumpulan sampah kami dirancang untuk memberikan
+              kenyamanan maksimal dengan dampak lingkungan minimal. Tim
+              profesional kami akan mengumpulkan sampah dari lokasi Anda sesuai
+              jadwal yang telah ditentukan.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3">Manfaat</h3>
+            <ul class="mb-6 space-y-2">
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Pengumpulan terjadwal dan tepat waktu</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Sistem pemilahan sampah yang efisien</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Pelaporan digital tentang volume dan jenis sampah</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Pengurangan jejak karbon melalui rute optimal</span
+                >
+              </li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3">Cara Mengakses</h3>
+            <ol class="mb-6 space-y-2 list-decimal list-inside text-gray-600">
+              <li>Daftar melalui aplikasi atau website Mall Sampah</li>
+              <li>Pilih jadwal pengumpulan yang sesuai kebutuhan Anda</li>
+              <li>Siapkan sampah sesuai kategori yang ditentukan</li>
+              <li>Tim kami akan mengumpulkan sampah sesuai jadwal</li>
+            </ol>
+
+            <h3 class="text-xl font-semibold mb-3">Biaya Layanan</h3>
+            <p class="text-gray-600 mb-6">
+              Mulai dari Rp 150.000/bulan untuk pengumpulan rutin mingguan.
+              Tersedia paket khusus untuk perumahan, apartemen, dan bisnis.
+            </p>
+
+            <button
+              class="bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+            >
+              Jadwalkan Pengumpulan
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detail Layanan: Daur Ulang -->
+    <section class="py-16 bg-white" id="daur-ulang">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+          <div class="w-full lg:w-1/2">
+            <img
+              src="https://readdy.ai/api/search-image?query=modern%20recycling%20facility%20with%20workers%20processing%20recyclable%20materials%2C%20clean%20environment%2C%20advanced%20sorting%20machinery%2C%20sustainable%20waste%20management%2C%20high%20quality%20photography&width=600&height=400&seq=4&orientation=landscape"
+              alt="Daur Ulang"
+              class="rounded-lg shadow-lg object-cover w-full h-full object-top"
+            />
+          </div>
+          <div class="w-full lg:w-1/2">
+            <h2 class="text-3xl font-bold mb-4">Daur Ulang</h2>
+            <p class="text-gray-600 mb-6">
+              Fasilitas daur ulang modern kami menggunakan teknologi terkini
+              untuk memproses berbagai jenis sampah menjadi bahan baku atau
+              produk baru yang bernilai. Kami berkomitmen untuk memaksimalkan
+              tingkat daur ulang dan meminimalkan pembuangan ke TPA.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3">Manfaat</h3>
+            <ul class="mb-6 space-y-2">
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Pengurangan sampah yang berakhir di TPA</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Konversi sampah menjadi produk bernilai ekonomi</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Sertifikat daur ulang untuk kebutuhan CSR perusahaan</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Transparansi proses melalui laporan dan kunjungan
+                  fasilitas</span
+                >
+              </li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3">
+              Jenis Sampah yang Didaur Ulang
+            </h3>
+            <div class="grid grid-cols-2 gap-2 mb-6">
+              <div class="flex items-center">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600">Plastik</span>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600">Kertas</span>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600">Logam</span>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600">Kaca</span>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600">Elektronik</span>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600">Organik</span>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">Biaya Layanan</h3>
+            <p class="text-gray-600 mb-6">
+              Harga bervariasi berdasarkan volume dan jenis sampah. Untuk sampah
+              bernilai ekonomi tinggi, kami menawarkan kompensasi. Hubungi kami
+              untuk penawaran khusus.
+            </p>
+
+            <button
+              class="bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+            >
+              Konsultasi Daur Ulang
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detail Layanan: Edukasi Lingkungan -->
+    <section class="py-16 bg-gray-50" id="edukasi">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <div class="w-full lg:w-1/2">
+            <img
+              src="https://readdy.ai/api/search-image?query=environmental%20education%20workshop%20with%20diverse%20group%20of%20participants%20learning%20about%20waste%20management%2C%20interactive%20session%2C%20sustainable%20practices%20demonstration%2C%20professional%20setting%2C%20high%20quality%20photography&width=600&height=400&seq=5&orientation=landscape"
+              alt="Edukasi Lingkungan"
+              class="rounded-lg shadow-lg object-cover w-full h-full object-top"
+            />
+          </div>
+          <div class="w-full lg:w-1/2">
+            <h2 class="text-3xl font-bold mb-4">Edukasi Lingkungan</h2>
+            <p class="text-gray-600 mb-6">
+              Program edukasi kami dirancang untuk meningkatkan kesadaran dan
+              pengetahuan tentang pengelolaan sampah yang berkelanjutan. Kami
+              menawarkan berbagai program untuk sekolah, perusahaan, dan
+              komunitas.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3">Program yang Tersedia</h3>
+            <ul class="mb-6 space-y-2">
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <div>
+                  <span class="font-medium">Workshop Pengelolaan Sampah</span>
+                  <p class="text-sm text-gray-600">
+                    Pelatihan praktis tentang pemilahan dan pengolahan sampah
+                    rumah tangga
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <div>
+                  <span class="font-medium">Kunjungan Fasilitas</span>
+                  <p class="text-sm text-gray-600">
+                    Tur edukasi ke fasilitas pengolahan dan daur ulang sampah
+                    kami
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <div>
+                  <span class="font-medium">Program Sekolah Hijau</span>
+                  <p class="text-sm text-gray-600">
+                    Kurikulum khusus untuk institusi pendidikan tentang
+                    lingkungan dan pengelolaan sampah
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <div>
+                  <span class="font-medium">Pelatihan Korporat</span>
+                  <p class="text-sm text-gray-600">
+                    Program khusus untuk perusahaan yang ingin menerapkan
+                    praktik berkelanjutan
+                  </p>
+                </div>
+              </li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3">Manfaat</h3>
+            <ul class="mb-6 space-y-2">
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Peningkatan kesadaran lingkungan</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Keterampilan praktis dalam pengelolaan sampah</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Sertifikat partisipasi untuk peserta</span
+                >
+              </li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3">Biaya Program</h3>
+            <p class="text-gray-600 mb-6">
+              Mulai dari Rp 2.500.000 untuk workshop grup. Tersedia diskon
+              khusus untuk sekolah dan organisasi non-profit.
+            </p>
+
+            <button
+              class="bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+            >
+              Jadwalkan Program
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detail Layanan: Program Kemitraan -->
+    <section class="py-16 bg-white" id="kemitraan">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+          <div class="w-full lg:w-1/2">
+            <img
+              src="https://readdy.ai/api/search-image?query=business%20partnership%20meeting%20about%20waste%20management%2C%20diverse%20professionals%20discussing%20sustainability%20initiatives%2C%20modern%20conference%20room%2C%20collaborative%20environment%2C%20high%20quality%20photography&width=600&height=400&seq=6&orientation=landscape"
+              alt="Program Kemitraan"
+              class="rounded-lg shadow-lg object-cover w-full h-full object-top"
+            />
+          </div>
+          <div class="w-full lg:w-1/2">
+            <h2 class="text-3xl font-bold mb-4">Program Kemitraan</h2>
+            <p class="text-gray-600 mb-6">
+              Kami bermitra dengan berbagai organisasi untuk menciptakan solusi
+              pengelolaan sampah yang berkelanjutan dan berdampak positif.
+              Program kemitraan kami dirancang untuk memenuhi kebutuhan spesifik
+              mitra kami.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3">Jenis Kemitraan</h3>
+            <ul class="mb-6 space-y-2">
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <div>
+                  <span class="font-medium">Kemitraan Korporat</span>
+                  <p class="text-sm text-gray-600">
+                    Program CSR dan pengelolaan sampah untuk perusahaan
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <div>
+                  <span class="font-medium">Kemitraan Komunitas</span>
+                  <p class="text-sm text-gray-600">
+                    Kolaborasi dengan kelompok masyarakat untuk program
+                    pengelolaan sampah lokal
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <div>
+                  <span class="font-medium">Kemitraan Pemerintah</span>
+                  <p class="text-sm text-gray-600">
+                    Kerjasama dengan instansi pemerintah untuk program
+                    pengelolaan sampah skala besar
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <div>
+                  <span class="font-medium">Kemitraan Penelitian</span>
+                  <p class="text-sm text-gray-600">
+                    Kolaborasi dengan institusi akademik untuk inovasi
+                    pengelolaan sampah
+                  </p>
+                </div>
+              </li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3">Manfaat Kemitraan</h3>
+            <ul class="mb-6 space-y-2">
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Solusi pengelolaan sampah yang disesuaikan</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Peningkatan citra dan reputasi berkelanjutan</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Akses ke jaringan mitra Mall Sampah</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line ri-lg"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Laporan dampak dan analisis data</span
+                >
+              </li>
+            </ul>
+
+            <button
+              class="bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+            >
+              Diskusikan Kemitraan
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimoni Pengguna -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-4">Apa Kata Mereka</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Dengarkan pengalaman langsung dari pelanggan dan mitra kami yang
+            telah merasakan manfaat dari layanan Mall Sampah.
+          </p>
+        </div>
+
+        <div class="relative">
+          <div class="flex overflow-x-auto gap-6 pb-8 testimonial-container">
+            <!-- Testimoni 1 -->
+            <div
+              class="testimonial-card bg-white p-6 rounded-lg shadow-md border border-gray-100 min-w-[300px] md:min-w-[350px] flex-shrink-0"
+            >
+              <div class="flex items-center mb-4">
+                <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                  <img
+                    src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20indonesian%20woman%20in%20business%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=7&orientation=squarish"
+                    alt="Testimoni"
+                    class="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div>
+                  <h4 class="font-semibold">Dewi Sulistiani</h4>
+                  <p class="text-sm text-gray-500">
+                    Pengelola Apartemen Menteng
+                  </p>
+                </div>
+              </div>
+              <div class="flex mb-3">
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-fill text-yellow-400"></i>
+              </div>
+              <p class="text-gray-600">
+                "Layanan pengumpulan sampah Mall Sampah sangat membantu kami
+                mengelola sampah di kompleks apartemen. Tim mereka profesional,
+                tepat waktu, dan sistem pelaporannya sangat transparan. Penghuni
+                apartemen kami sangat puas!"
+              </p>
+            </div>
+
+            <!-- Testimoni 2 -->
+            <div
+              class="testimonial-card bg-white p-6 rounded-lg shadow-md border border-gray-100 min-w-[300px] md:min-w-[350px] flex-shrink-0"
+            >
+              <div class="flex items-center mb-4">
+                <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                  <img
+                    src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20indonesian%20man%20in%20casual%20business%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=8&orientation=squarish"
+                    alt="Testimoni"
+                    class="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div>
+                  <h4 class="font-semibold">Budi Santoso</h4>
+                  <p class="text-sm text-gray-500">
+                    Manajer Operasional PT Maju Bersama
+                  </p>
+                </div>
+              </div>
+              <div class="flex mb-3">
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-half-fill text-yellow-400"></i>
+              </div>
+              <p class="text-gray-600">
+                "Program kemitraan dengan Mall Sampah telah membantu perusahaan
+                kami mencapai target keberlanjutan. Proses daur ulang mereka
+                sangat efisien dan laporan dampak lingkungan yang mereka berikan
+                sangat bermanfaat untuk laporan CSR kami."
+              </p>
+            </div>
+
+            <!-- Testimoni 3 -->
+            <div
+              class="testimonial-card bg-white p-6 rounded-lg shadow-md border border-gray-100 min-w-[300px] md:min-w-[350px] flex-shrink-0"
+            >
+              <div class="flex items-center mb-4">
+                <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                  <img
+                    src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20indonesian%20woman%20in%20teaching%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=9&orientation=squarish"
+                    alt="Testimoni"
+                    class="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div>
+                  <h4 class="font-semibold">Siti Rahayu</h4>
+                  <p class="text-sm text-gray-500">
+                    Kepala Sekolah SDN 03 Jakarta
+                  </p>
+                </div>
+              </div>
+              <div class="flex mb-3">
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-fill text-yellow-400"></i>
+              </div>
+              <p class="text-gray-600">
+                "Program edukasi lingkungan Mall Sampah sangat interaktif dan
+                informatif. Siswa-siswa kami sangat antusias dan banyak belajar
+                tentang pentingnya pengelolaan sampah. Kunjungan ke fasilitas
+                daur ulang mereka adalah pengalaman yang tak terlupakan!"
+              </p>
+            </div>
+
+            <!-- Testimoni 4 -->
+            <div
+              class="testimonial-card bg-white p-6 rounded-lg shadow-md border border-gray-100 min-w-[300px] md:min-w-[350px] flex-shrink-0"
+            >
+              <div class="flex items-center mb-4">
+                <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                  <img
+                    src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20indonesian%20man%20in%20government%20official%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=10&orientation=squarish"
+                    alt="Testimoni"
+                    class="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div>
+                  <h4 class="font-semibold">Agus Wibowo</h4>
+                  <p class="text-sm text-gray-500">
+                    Kepala Dinas Lingkungan Hidup
+                  </p>
+                </div>
+              </div>
+              <div class="flex mb-3">
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-fill text-yellow-400"></i>
+                <i class="ri-star-fill text-yellow-400"></i>
+              </div>
+              <p class="text-gray-600">
+                "Kerjasama dengan Mall Sampah dalam program pengelolaan sampah
+                kota telah memberikan dampak signifikan. Tingkat daur ulang
+                meningkat 30% dan volume sampah ke TPA berkurang drastis. Model
+                bisnis mereka patut dicontoh oleh pengelola sampah lainnya."
+              </p>
+            </div>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <button
+            class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-md p-2 z-10 testimonial-prev hidden md:block"
+          >
+            <i class="ri-arrow-left-s-line ri-lg text-gray-600"></i>
+          </button>
+          <button
+            class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-md p-2 z-10 testimonial-next hidden md:block"
+          >
+            <i class="ri-arrow-right-s-line ri-lg text-gray-600"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Harga Layanan -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-4">Paket Layanan</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Pilih paket layanan yang sesuai dengan kebutuhan Anda. Kami
+            menawarkan berbagai opsi untuk individu, bisnis, dan komunitas.
+          </p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8 justify-center">
+          <!-- Paket Basic -->
+          <div
+            class="bg-white rounded-lg shadow-md border border-gray-100 p-8 flex flex-col w-full lg:w-1/3 transition-transform hover:-translate-y-2"
+          >
+            <h3 class="text-xl font-bold mb-2">Paket Basic</h3>
+            <p class="text-gray-600 mb-6">Ideal untuk rumah tangga kecil</p>
+            <div class="text-4xl font-bold mb-6">
+              Rp 150.000<span class="text-lg font-normal text-gray-600"
+                >/bulan</span
+              >
+            </div>
+
+            <ul class="mb-8 space-y-3 flex-grow">
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Pengumpulan sampah 1x seminggu</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line"></i>
+                </div>
+                <span class="text-gray-600">Pemilahan 3 kategori sampah</span>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line"></i>
+                </div>
+                <span class="text-gray-600">Laporan bulanan</span>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-gray-300 mr-2"
+                >
+                  <i class="ri-close-line"></i>
+                </div>
+                <span class="text-gray-400">Pengumpulan sampah khusus</span>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-gray-300 mr-2"
+                >
+                  <i class="ri-close-line"></i>
+                </div>
+                <span class="text-gray-400">Konsultasi pengelolaan sampah</span>
+              </li>
+            </ul>
+
+            <button
+              class="border border-primary text-primary px-6 py-3 !rounded-button hover:bg-primary hover:text-white transition-colors whitespace-nowrap"
+            >
+              Pilih Paket
+            </button>
+          </div>
+
+          <!-- Paket Premium -->
+          <div
+            class="bg-white rounded-lg shadow-lg border-2 border-primary p-8 flex flex-col w-full lg:w-1/3 relative transition-transform hover:-translate-y-2 z-10"
+          >
+            <div
+              class="absolute top-0 right-0 bg-primary text-white px-4 py-1 text-sm font-medium rounded-bl-lg rounded-tr-lg"
+            >
+              Terpopuler
+            </div>
+            <h3 class="text-xl font-bold mb-2">Paket Premium</h3>
+            <p class="text-gray-600 mb-6">
+              Ideal untuk rumah tangga besar atau bisnis kecil
+            </p>
+            <div class="text-4xl font-bold mb-6">
+              Rp 350.000<span class="text-lg font-normal text-gray-600"
+                >/bulan</span
+              >
+            </div>
+
+            <ul class="mb-8 space-y-3 flex-grow">
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Pengumpulan sampah 2x seminggu</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line"></i>
+                </div>
+                <span class="text-gray-600">Pemilahan 5 kategori sampah</span>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line"></i>
+                </div>
+                <span class="text-gray-600">Laporan mingguan dan bulanan</span>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Pengumpulan sampah khusus 1x sebulan</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-gray-300 mr-2"
+                >
+                  <i class="ri-close-line"></i>
+                </div>
+                <span class="text-gray-400">Konsultasi pengelolaan sampah</span>
+              </li>
+            </ul>
+
+            <button
+              class="bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+            >
+              Pilih Paket
+            </button>
+          </div>
+
+          <!-- Paket Bisnis -->
+          <div
+            class="bg-white rounded-lg shadow-md border border-gray-100 p-8 flex flex-col w-full lg:w-1/3 transition-transform hover:-translate-y-2"
+          >
+            <h3 class="text-xl font-bold mb-2">Paket Bisnis</h3>
+            <p class="text-gray-600 mb-6">
+              Ideal untuk bisnis menengah dan besar
+            </p>
+            <div class="text-4xl font-bold mb-6">
+              Rp 950.000<span class="text-lg font-normal text-gray-600"
+                >/bulan</span
+              >
+            </div>
+
+            <ul class="mb-8 space-y-3 flex-grow">
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Pengumpulan sampah 3x seminggu</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line"></i>
+                </div>
+                <span class="text-gray-600">Pemilahan 7 kategori sampah</span>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Laporan real-time dan analisis</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Pengumpulan sampah khusus unlimited</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-check-line"></i>
+                </div>
+                <span class="text-gray-600">Konsultasi pengelolaan sampah</span>
+              </li>
+            </ul>
+
+            <button
+              class="border border-primary text-primary px-6 py-3 !rounded-button hover:bg-primary hover:text-white transition-colors whitespace-nowrap"
+            >
+              Pilih Paket
+            </button>
+          </div>
+        </div>
+
+        <div class="text-center mt-12">
+          <p class="text-gray-600 mb-4">Butuh solusi yang lebih disesuaikan?</p>
+          <button
+            class="bg-white border border-primary text-primary px-6 py-3 !rounded-button hover:bg-primary hover:text-white transition-colors whitespace-nowrap"
+          >
+            Hubungi Tim Kami
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call-to-Action -->
+    <section class="cta-section py-16">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+          Siap Bergabung dengan Mall Sampah?
+        </h2>
+        <p class="text-white text-lg max-w-2xl mx-auto mb-8">
+          Mulai perjalanan Anda menuju gaya hidup dan bisnis yang lebih
+          berkelanjutan. Bersama-sama, kita dapat menciptakan lingkungan yang
+          lebih bersih dan masa depan yang lebih hijau.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <button
+            class="bg-white text-primary px-6 py-3 font-medium !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+          >
+            Mulai Sekarang
+          </button>
+          <button
+            class="border-2 border-white text-white px-6 py-3 font-medium !rounded-button hover:bg-white hover:bg-opacity-10 transition-colors whitespace-nowrap"
+          >
+            Hubungi Kami
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <!-- Company Info -->
+          <div>
+            <a
+              href="#"
+              class="text-2xl font-['Pacifico'] text-white mb-4 inline-block"
+              >logo</a
+            >
+            <p class="text-gray-300 mb-6">
+              Mall Sampah adalah pionir dalam pengelolaan sampah terpadu di
+              Indonesia. Kami berkomitmen untuk menciptakan lingkungan yang
+              lebih bersih dan berkelanjutan.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
+              >
+                <i class="ri-facebook-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
+              >
+                <i class="ri-instagram-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
+              >
+                <i class="ri-twitter-x-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
+              >
+                <i class="ri-linkedin-fill"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Link Cepat</h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Beranda</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Tentang Kami</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Layanan</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Blog</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Karir</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-white transition-colors"
+                  >Kontak</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Kontak Kami</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <span class="text-gray-300"
+                  >Jl. Lingkungan Hijau No. 123, Jakarta Selatan,
+                  Indonesia</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-phone-line"></i>
+                </div>
+                <span class="text-gray-300">+62 21 1234 5678</span>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-mail-line"></i>
+                </div>
+                <span class="text-gray-300">info@mallsampah.id</span>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                >
+                  <i class="ri-time-line"></i>
+                </div>
+                <span class="text-gray-300">Senin - Jumat: 08:00 - 17:00</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Newsletter -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Berlangganan Newsletter</h3>
+            <p class="text-gray-300 mb-4">
+              Dapatkan informasi terbaru tentang layanan dan program kami.
+            </p>
+            <form class="mb-4">
+              <div class="flex">
+                <input
+                  type="email"
+                  placeholder="Email Anda"
+                  class="bg-gray-700 text-white px-4 py-2 rounded-l-lg w-full focus:outline-none focus:ring-2 focus:ring-primary border-none"
+                  required
+                />
+                <button
+                  type="submit"
+                  class="bg-primary text-white px-4 py-2 rounded-r-lg hover:bg-opacity-90 transition-colors whitespace-nowrap"
+                >
+                  <i class="ri-send-plane-fill"></i>
+                </button>
+              </div>
+            </form>
+            <div class="flex items-center">
+              <label class="custom-checkbox">
+                <input type="checkbox" />
+                <span class="checkmark"></span>
+              </label>
+              <span class="text-gray-300 text-sm"
+                >Saya setuju menerima email marketing dari Mall Sampah</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 pt-8">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400 text-sm mb-4 md:mb-0">
+              &copy; 2025 Mall Sampah. Hak Cipta Dilindungi.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white text-sm transition-colors"
+                >Kebijakan Privasi</a
+              >
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white text-sm transition-colors"
+                >Syarat & Ketentuan</a
+              >
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white text-sm transition-colors"
+                >Peta Situs</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script id="mobileMenuToggle">
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuButton = document.querySelector(".md\\:hidden");
+        const mobileMenu = document.querySelector(".fixed.inset-0.bg-white");
+
+        menuButton.addEventListener("click", function () {
+          if (mobileMenu.classList.contains("hidden")) {
+            mobileMenu.classList.remove("hidden");
+            menuButton.innerHTML = '<i class="ri-close-line ri-lg"></i>';
+          } else {
+            mobileMenu.classList.add("hidden");
+            menuButton.innerHTML = '<i class="ri-menu-line ri-lg"></i>';
+          }
+        });
+      });
+    </script>
+
+    <script id="testimonialSlider">
+      document.addEventListener("DOMContentLoaded", function () {
+        const container = document.querySelector(".testimonial-container");
+        const prevBtn = document.querySelector(".testimonial-prev");
+        const nextBtn = document.querySelector(".testimonial-next");
+        const cards = document.querySelectorAll(".testimonial-card");
+
+        if (!container || !prevBtn || !nextBtn || cards.length === 0) return;
+
+        const cardWidth = cards[0].offsetWidth + 24; // card width + gap
+
+        nextBtn.addEventListener("click", function () {
+          container.scrollBy({ left: cardWidth, behavior: "smooth" });
+        });
+
+        prevBtn.addEventListener("click", function () {
+          container.scrollBy({ left: -cardWidth, behavior: "smooth" });
+        });
+      });
+    </script>
+  </body>
+</html>
